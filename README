@@ -1,0 +1,9 @@
+This is source of project "Solar"
+
+"Solar" is game, where you should control a "space object", it may be asteroid, planet, star, black hole, etc.
+Also you can attract another objects and advance yor mass.
+
+Structure of source tree:
+main.py    begin game
+
+Written by students of Moscow Institute of Physics and Technology, Russia
