@@ -1,4 +1,4 @@
-""" Contains class space_obj, parent class for space objects such as asteroids, planets, etc"""
+""" Contains class space_obj, parent class for space objects such as asteroids, planets, etc """
 
 
 class space_obj:
@@ -13,7 +13,8 @@ class space_obj:
         self.force_x = 0
         self.force_y = 0
 
-    def screen_coords(self):
+    # Protected
+    def _screen_coords(self):
         return self.x - self.player.x, self.y - self.player.y
 
     @abstractmethod
@@ -29,3 +30,7 @@ class space_obj:
     def apply_force(self, force_x, force_y):
         self.force_x += force_x
         self.force_y += force_y
+
+    def set_force(self, force_x, force_y):
+        self.force_x = force_x
+        self.force_y = force_y
