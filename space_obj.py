@@ -12,6 +12,7 @@ class space_obj:
         self.player = player
         self.force_x = 0
         self.force_y = 0
+        self.type = None
 
     def screen_coords(self):
         return self.x - self.player.x, self.y - self.player.y
