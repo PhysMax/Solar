@@ -1,4 +1,5 @@
 import tkinter as tk
+from misc_objects import *
 
 root = tk.Tk()
 
@@ -20,7 +21,7 @@ canv.pack(side=tk.TOP)
 
 def render():
     for obj in space_objects:
-        obj.draw(canv)
+        obj.draw()
     canv.after(dtime_render, render)
 
 
@@ -29,6 +30,9 @@ def step():
         obj.move(dtime_phys)
     canv.after(dtime_phys, step)
 
+
+player = Planet(10, 0, 0, 0, 0, 10, None, canv)
+space_objects.append(player)
 
 step()
 render()
