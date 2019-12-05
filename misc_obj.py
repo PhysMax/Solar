@@ -2,10 +2,9 @@
 from random import choice
 from space_obj import space_obj
 
-
-colors_planet = ['green', 'blue', 'aqua', 'violet', 'lime', 'cyan']
-colors_asteroid = ['brown', 'maroon']
-colors_star = ['red', 'orange', 'yellow', 'chartreuse']
+colors_planet = ['green', 'blue', 'olive drab', 'LightSkyBlue2']
+colors_asteroid = ['burlywood3', 'gray53']
+colors_star = ['red', 'yellow', 'gold', 'orange red']
 
 
 def draw(obj: 'space_obj', r: 'float', color):
@@ -35,7 +34,7 @@ class Planet(space_obj):
     def __init__(self, m, x, y, vx, vy, size, player, canvas):
         super().__init__(m, x, y, vx, vy, size, player, canvas)
 
-        self.r = 20
+        self.r = 6
         self.color = choice(colors_planet)
 
     def draw(self):
@@ -46,7 +45,7 @@ class Asteroid(space_obj):
     def __init__(self, m, x, y, vx, vy, size, player, canvas):
         super().__init__(m, x, y, vx, vy, size, player, canvas)
 
-        self.r = 15
+        self.r = 3
         self.color = choice(colors_asteroid)
 
     def draw(self):
@@ -57,7 +56,7 @@ class Star(space_obj):
     def __init__(self, m, x, y, vx, vy, size, player, canvas):
         super().__init__(m, x, y, vx, vy, size, player, canvas)
 
-        self.r = 30
+        self.r = 15
         self.color = choice(colors_star)
 
     def draw(self):

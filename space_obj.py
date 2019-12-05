@@ -1,5 +1,8 @@
-""" Contains class space_obj, parent class for space objects such as asteroids, planets, etc """
+""" Contains class space_obj, parent class for space objects such as asteroids,
+planets, etc """
+
 from abc import abstractmethod
+from random import uniform
 
 
 class space_obj:
@@ -17,6 +20,10 @@ class space_obj:
         self.force_y = 0
         self.canvas = canvas
         self.id = None
+        self.satellites = []
+        self.satellite_of = None
+        # Angular velocity
+        self.omg = None
 
     # Protected
     def screen_coords(self):
@@ -27,10 +34,25 @@ class space_obj:
         pass
 
     def move(self, dt):
-        self.x += self.vx * dt
-        self.y += self.vy * dt
-        self.vx = self.force_x / self.m * dt
-        self.vy = self.force_y / self.m * dt
+        if self.satellite_of is None:
+            self.x += self.vx * dt
+            self.y += self.vy * dt
+            self.vx += self.force_x / self.m * dt
+            self.vy += self.force_y / self.m * dt
+        else:
+            self.x += self.vx * dt
+            self.y += self.vy * dt
+            self.vx = self.satellite_of.vx - self.omg * (
+                    self.y - self.satellite_of.y)
+            self.vy = self.satellite_of.vy + self.omg * (
+                    self.x - self.satellite_of.x)
+
+    def add_satellite(self, obj):
+        self.satellites.append(obj)
+
+    def become_satellite(self, obj):
+        self.omg = uniform(0, 0.001)
+        self.satellite_of = obj
 
     def apply_force(self, force_x, force_y):
         self.force_x += force_x
