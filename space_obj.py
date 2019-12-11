@@ -3,6 +3,7 @@ planets, etc """
 
 from abc import abstractmethod
 from random import uniform
+import math as m
 
 
 class space_obj:
@@ -18,10 +19,13 @@ class space_obj:
         self.player = player
         self.force_x = 0
         self.force_y = 0
+
         self.canvas = canvas
         self.id = None
+
         self.satellites = []
         self.satellite_of = None
+        self.sat_num = None
         # Angular velocity
         self.omg = None
 
@@ -39,6 +43,7 @@ class space_obj:
             self.y += self.vy * dt
             self.vx += self.force_x / self.m * dt
             self.vy += self.force_y / self.m * dt
+
         else:
             self.x += self.vx * dt
             self.y += self.vy * dt
@@ -50,9 +55,21 @@ class space_obj:
     def add_satellite(self, obj):
         self.satellites.append(obj)
 
+    # Experimental
+    def set_orbit(self, obj):
+        orbit_r0 = ((self.x - obj.x) ** 2 + (self.y - obj.y) ** 2) ** 0.5
+        orbit_r = obj.m ** 0.5 + 10 * self.sat_num
+        self.x = obj.x + (self.x - obj.x) * orbit_r / orbit_r0
+        self.y = obj.y + (self.y - obj.y) * orbit_r / orbit_r0
+
     def become_satellite(self, obj):
-        self.omg = uniform(0, 0.001)
+        self.omg = uniform(0.005, 0.01) / (self.m ** 0.5)
         self.satellite_of = obj
+        # Experimental
+        self.sat_num = len(obj.satellites) + 1
+        self.set_orbit(obj)
+        for satellite in self.satellites:
+            satellite.set_orbit(self)
 
     def apply_force(self, force_x, force_y):
         self.force_x += force_x
