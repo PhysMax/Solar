@@ -36,6 +36,7 @@ class Planet(space_obj):
 
         self.r = 6
         self.color = choice(colors_planet)
+        self.type = 'planet'
 
     def draw(self):
         draw(self, self.r, self.color)
@@ -47,6 +48,7 @@ class Asteroid(space_obj):
 
         self.r = 3
         self.color = choice(colors_asteroid)
+        self.type = 'asteroid'
 
     def draw(self):
         draw(self, self.r, self.color)
@@ -58,6 +60,7 @@ class Star(space_obj):
 
         self.r = 15
         self.color = choice(colors_star)
+        self.type = 'star'
 
     def draw(self):
         draw(self, self.r, self.color)
