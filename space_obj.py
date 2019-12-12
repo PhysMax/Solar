@@ -18,6 +18,8 @@ class space_obj:
         self.player = player
         self.force_x = 0
         self.force_y = 0
+        self.key_force_x = 0
+        self.key_force_y = 0
         self.canvas = canvas
         self.id = None
         self.satellites = []

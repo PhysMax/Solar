@@ -6,6 +6,8 @@ gravitational_constant = 6.67E-11
 
 def calculate_gravitation(space_objects):
     for main_obj in space_objects:
+        main_obj.force_x = 0
+        main_obj.force_y = 0
         for obj in space_objects:
             if main_obj == obj:
                 continue
