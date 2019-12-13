@@ -4,7 +4,6 @@ from misc_obj import *
 from calculate_gravitation import *
 from satellites_formation import *
 from keypress import *
-from constants import *
 from objects_generator import *
 
 root = tk.Tk()
