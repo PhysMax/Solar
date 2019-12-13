@@ -1,8 +1,5 @@
 """ Function which calculate gravitation. Return force_x, force_y """
-
-
-gravitational_constant = 6.67E-11
-
+from constants import *
 
 def calculate_gravitation(space_objects):
     for main_obj in space_objects:

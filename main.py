@@ -1,13 +1,13 @@
 import tkinter as tk
+
 from misc_obj import *
 from calculate_gravitation import *
 from satellites_formation import *
 from keypress import *
+from constants import *
+from objects_generator import *
 
 root = tk.Tk()
-
-window_width = 800
-window_height = 600
 
 # Time interval between redrawings
 dtime_render = 1
@@ -21,6 +21,7 @@ canv.pack(side=tk.TOP)
 def render():
     for obj in space_objects:
         obj.draw()
+
     canv.after(dtime_render, render)
 
 
@@ -39,6 +40,11 @@ def gravity():
     canv.after(dtime_phys, gravity)
 
 
+def gen():
+    generate(player, space_objects, canv)
+
+
+
 space_objects = list()
 
 player = Planet(1000000, 0, 0, 0, 0, 10, None, canv)
@@ -55,12 +61,12 @@ space_objects.append(planet)
 
 star = Star(10000, -110, 90, 0.05, 0.05, 10, player, canv)
 space_objects.append(star)
-star1 = Star(10000, -110, 40, 0.05, 0.05, 10, player, canv)
-space_objects.append(star1)
+
 
 gravity()
 step()
 render()
+gen()
 
 root.bind("<KeyPress-w>", lambda event, p=player: move_player(event, p))
 root.bind("<KeyRelease-w>", lambda event, p=player: stop_player(event, p))
