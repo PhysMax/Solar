@@ -8,8 +8,8 @@ def catch_satellite(main_obj, obj, max_distance, max_speed):
             main_obj.y - obj.y) ** 2 < max_distance ** 2:
         if (main_obj.vx - obj.vx) ** 2 + (
                 main_obj.vy - obj.vy) ** 2 < max_speed ** 2:
-            main_obj.add_satellite(obj)
             obj.become_satellite(main_obj)
+            main_obj.add_satellite(obj)
 
 
 def satellites_formation(space_objects):

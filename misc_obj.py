@@ -2,9 +2,9 @@
 from random import choice
 from space_obj import space_obj
 
-colors_planet = ['green', 'blue', 'olive drab', 'LightSkyBlue2']
+colors_planet = ['green', 'olive drab', 'LightSkyBlue2']
 colors_asteroid = ['burlywood3', 'gray53']
-colors_star = ['red', 'yellow', 'gold', 'orange red']
+colors_star = ['yellow', 'gold', 'orange red']
 
 
 def draw(obj: 'space_obj', r: 'float', color):
