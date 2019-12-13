@@ -1,9 +1,9 @@
 import tkinter as tk
-from PIL import ImageTk, Image
 from calculate_gravitation import *
 from satellites_formation import *
 from keypress import *
 from objects_generator import *
+from background import*
 
 root = tk.Tk()
 
@@ -24,15 +24,10 @@ label_1 = tk.Label(root, text='Planet', bg='black', fg='white', width=114)
 label_1.pack()
 
 
-pilImage = Image.open("image_space_3_1.jpg")
-image = ImageTk.PhotoImage(pilImage)
-image_sprite = canv.create_image(0, 0, anchor='nw', image=image)
-
-
 def render():
+    background.draw()
     for obj in space_objects:
         obj.draw()
-
     canv.after(dtime_render, render)
 
 
@@ -63,6 +58,7 @@ def step():
             obj.apply_force(obj.key_force_x, obj.key_force_y)
             obj.move(dtime_phys)
             destroy(obj, space_objects)
+            background.move(dtime_phys)
         calculate_gravitation(space_objects)
     lab_config()
     canv.after(dtime_real, step)
@@ -88,6 +84,8 @@ space_objects.append(planet)
 
 star = Star(10000, -110, 90, 0.1, 0.1, 10, player, canv)
 space_objects.append(star)
+
+background = Background(canv, 0, 0, "space_1_2.png", player)
 
 generate(player, space_objects, canv)
 step()
