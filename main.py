@@ -85,6 +85,7 @@ space_objects.append(planet)
 star = Star(10000, -110, 90, 0.1, 0.1, 10, player, canv)
 space_objects.append(star)
 
+backgrounds_list = list()
 background = Background(canv, 0, 0, "space_1_2.png", player)
 
 generate(player, space_objects, canv)

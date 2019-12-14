@@ -49,9 +49,7 @@ class space_obj:
             self.force_x = 0
             self.force_y = 0
         elif self.absorbed:
-            # Test
             self.rel_p *= 0.9999
-            #
             self.x = self.satellite_of.x + (
                     self.x - self.satellite_of.x) * self.rel_p
             self.y = self.satellite_of.y + (
