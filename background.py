@@ -1,58 +1,6 @@
+""" Class to contain, draw and move background """
+
 from PIL import ImageTk, Image
-
-
-def fill_bg(bg_obj):
-    bg_obj.list.append(
-        bg_obj.canvas.create_image(bg_obj.x - bg_obj.w, bg_obj.y - bg_obj.h,
-                                   anchor='nw',
-                                   image=bg_obj.image))
-    bg_obj.list.append(
-        bg_obj.canvas.create_image(bg_obj.x, bg_obj.y - bg_obj.h,
-                                   anchor='nw',
-                                   image=bg_obj.image))
-    bg_obj.list.append(
-        bg_obj.canvas.create_image(bg_obj.x + bg_obj.w, bg_obj.y - bg_obj.h,
-                                   anchor='nw',
-                                   image=bg_obj.image))
-    bg_obj.list.append(
-        bg_obj.canvas.create_image(bg_obj.x - bg_obj.w, bg_obj.y,
-                                   anchor='nw',
-                                   image=bg_obj.image))
-    bg_obj.list.append(bg_obj.canvas.create_image(bg_obj.x, bg_obj.y,
-                                                  anchor='nw',
-                                                  image=bg_obj.image))
-    bg_obj.list.append(
-        bg_obj.canvas.create_image(bg_obj.x + bg_obj.w, bg_obj.y,
-                                   anchor='nw',
-                                   image=bg_obj.image))
-    bg_obj.list.append(
-        bg_obj.canvas.create_image(bg_obj.x - bg_obj.w, bg_obj.y + bg_obj.h,
-                                   anchor='nw',
-                                   image=bg_obj.image))
-    bg_obj.list.append(
-        bg_obj.canvas.create_image(bg_obj.x, bg_obj.y + bg_obj.h,
-                                   anchor='nw',
-                                   image=bg_obj.image))
-    bg_obj.list.append(
-        bg_obj.canvas.create_image(bg_obj.x + bg_obj.w, bg_obj.y + bg_obj.h,
-                                   anchor='nw',
-                                   image=bg_obj.image))
-
-
-def set_bgcoords(bg_obj):
-    bg_obj.canvas.coords(bg_obj.list[0], bg_obj.x - bg_obj.w,
-                         bg_obj.y - bg_obj.h)
-    bg_obj.canvas.coords(bg_obj.list[1], bg_obj.x, bg_obj.y - bg_obj.h)
-    bg_obj.canvas.coords(bg_obj.list[2], bg_obj.x + bg_obj.w,
-                         bg_obj.y - bg_obj.h)
-    bg_obj.canvas.coords(bg_obj.list[3], bg_obj.x - bg_obj.w, bg_obj.y)
-    bg_obj.canvas.coords(bg_obj.list[4], bg_obj.x, bg_obj.y)
-    bg_obj.canvas.coords(bg_obj.list[5], bg_obj.x + bg_obj.w, bg_obj.y)
-    bg_obj.canvas.coords(bg_obj.list[6], bg_obj.x - bg_obj.w,
-                         bg_obj.y + bg_obj.h)
-    bg_obj.canvas.coords(bg_obj.list[7], bg_obj.x, bg_obj.y + bg_obj.h)
-    bg_obj.canvas.coords(bg_obj.list[8], bg_obj.x + bg_obj.w,
-                         bg_obj.y + bg_obj.h)
 
 
 class Background:
@@ -68,20 +16,73 @@ class Background:
         self.vx = 0
         self.vy = 0
         self.k = 0.01
-        self.list = []
+        self.canv_objects = []
         self.w = int(self.canvas.cget('width'))
         self.h = int(self.canvas.cget('height'))
+
+    def fill_bg(self):
+        self.canv_objects.append(
+            self.canvas.create_image(self.x - self.w, self.y - self.h,
+                                     anchor='nw',
+                                     image=self.image))
+        self.canv_objects.append(
+            self.canvas.create_image(self.x, self.y - self.h,
+                                     anchor='nw',
+                                     image=self.image))
+        self.canv_objects.append(
+            self.canvas.create_image(self.x + self.w, self.y - self.h,
+                                     anchor='nw',
+                                     image=self.image))
+        self.canv_objects.append(
+            self.canvas.create_image(self.x - self.w, self.y,
+                                     anchor='nw',
+                                     image=self.image))
+        self.canv_objects.append(
+	    self.canvas.create_image(self.x, self.y,
+                                     anchor='nw',
+                                     image=self.image))
+        self.canv_objects.append(
+            self.canvas.create_image(self.x + self.w, self.y,
+                                     anchor='nw',
+                                     image=self.image))
+        self.canv_objects.append(
+            self.canvas.create_image(self.x - self.w, self.y + self.h,
+                                     anchor='nw',
+                                     image=self.image))
+        self.canv_objects.append(
+            self.canvas.create_image(self.x, self.y + self.h,
+                                     anchor='nw',
+                                     image=self.image))
+        self.canv_objects.append(
+            self.canvas.create_image(self.x + self.w, self.y + self.h,
+                                     anchor='nw',
+                                     image=self.image))
+
+    def set_bgcoords(self):
+        self.canvas.coords(self.canv_objects[0], self.x - self.w,
+                           self.y - self.h)
+        self.canvas.coords(self.canv_objects[1], self.x, self.y - self.h)
+        self.canvas.coords(self.canv_objects[2], self.x + self.w,
+                           self.y - self.h)
+        self.canvas.coords(self.canv_objects[3], self.x - self.w, self.y)
+        self.canvas.coords(self.canv_objects[4], self.x, self.y)
+        self.canvas.coords(self.canv_objects[5], self.x + self.w, self.y)
+        self.canvas.coords(self.canv_objects[6], self.x - self.w,
+                           self.y + self.h)
+        self.canvas.coords(self.canv_objects[7], self.x, self.y + self.h)
+        self.canvas.coords(self.canv_objects[8], self.x + self.w,
+                           self.y + self.h)
 
     def draw(self):
         if self.image_sprite is None:
             self.image_sprite = 1
-            fill_bg(self)
+            self.fill_bg()
         else:
-            set_bgcoords(self)
+            self.set_bgcoords()
 
     def move(self, dt):
-        self.vx = - self.player.vx * self.k
-        self.vy = - self.player.vy * self.k
+        self.vx = -self.player.vx * self.k
+        self.vy = -self.player.vy * self.k
         self.x += self.vx * dt
         self.y += self.vy * dt
         if self.x <= -self.w or self.x >= self.w:
