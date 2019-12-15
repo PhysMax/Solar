@@ -13,9 +13,10 @@ class Background:
 
         self.image = ImageTk.PhotoImage(self.pilImage)
         self.image_sprite = None
-        self.vx = 0
-        self.vy = 0
-        self.k = 0.01
+	# 9 pictures puted in this way:
+	#       0  1  2
+	#       3  4  5
+	#       6  7  8
         self.canv_objects = []
         self.w = int(self.canvas.cget('width'))
         self.h = int(self.canvas.cget('height'))
@@ -81,10 +82,9 @@ class Background:
             self.set_bgcoords()
 
     def move(self, dt):
-        self.vx = -self.player.vx * self.k
-        self.vy = -self.player.vy * self.k
-        self.x += self.vx * dt
-        self.y += self.vy * dt
+        self.x -= self.player.vx * dt
+        self.y -= self.player.vy * dt
+	# Cycling
         if self.x <= -self.w or self.x >= self.w:
             self.x = 0
         elif self.y <= -self.h or self.y >= self.h:

@@ -58,8 +58,8 @@ def step():
             obj.apply_force(obj.key_force_x, obj.key_force_y)
             obj.move(dtime_phys)
             destroy(obj, space_objects)
-            background.move(dtime_phys)
         calculate_gravitation(space_objects)
+        background.move(dtime_phys)
     lab_config()
     canv.after(dtime_real, step)
 
