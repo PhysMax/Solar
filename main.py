@@ -64,6 +64,12 @@ def step():
     canv.after(dtime_real, step)
 
 
+def gen():
+    quantity_obj = 20
+    check_live_field(player, space_objects, quantity_obj, canv)
+    root.after(25, gen)
+
+
 player = Planet(100, 0, 0, 0, 0, 10, None, canv)
 ast_1 = Asteroid(1, -170, 0, 0, 0.04, 30, player, canv)
 space_objects.append(player)
@@ -88,7 +94,8 @@ space_objects.append(star)
 backgrounds_list = list()
 background = Background(canv, 0, 0, "images/space_1_2.png", player)
 
-generate(player, space_objects, canv)
+gen()
+
 step()
 render()
 
