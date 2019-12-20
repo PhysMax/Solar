@@ -1,5 +1,5 @@
 import tkinter as tk
-from calculate_gravitation import *
+from interact import *
 from satellites_formation import *
 from keypress import *
 from objects_generator import *
@@ -58,7 +58,7 @@ def step():
             obj.apply_force(obj.key_force_x, obj.key_force_y)
             obj.move(dtime_phys)
             destroy(obj, space_objects)
-        calculate_gravitation(space_objects)
+        interact(space_objects)
         background.move(dtime_phys)
     lab_config()
     canv.after(dtime_real, step)

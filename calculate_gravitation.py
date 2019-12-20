@@ -2,23 +2,15 @@
 from phys_constants import *
 
 
-def calculate_gravitation(space_objects):
-    """Calculate gravitation and return force_x, force_y"""
-    for main_obj in space_objects:
-        main_obj.force_x = 0
-        main_obj.force_y = 0
-        for obj in space_objects:
-            # Object doesn't interact with yourself
-            if main_obj == obj:
-                continue
-            if main_obj.m >= max_mass_ratio * obj.m:
-                continue
-            r = ((main_obj.x - obj.x) ** 2 + (main_obj.y - obj.y) ** 2) ** 0.5
-            # At a certain distance dependent on masses the objects don't
-            # interact
-            """ max_length = main_obj.m / obj.m * length_const
-            if r > max_length:
-                continue"""
-            F = gravitational_constant * (main_obj.m * obj.m) / r ** 2
-            main_obj.force_x += F * (obj.x - main_obj.x) / r
-            main_obj.force_y += F * (obj.y - main_obj.y) / r
+def calculate_gravitation(obj1, obj2):
+    """Calculate gravitation and return force_x, force_y acts on obj1"""
+    if obj1.m * obj2.m  < min_mass2:
+        return 0, 0
+    r = ((obj1.x - obj2.x) ** 2 + (obj1.y - obj2.y) ** 2) ** 0.5
+    # At a certain distance dependent on masses the objects don't
+    # interact
+    """ max_length = main_obj.m / obj.m * length_const
+    if r > max_length:
+       continue"""
+    F = gravitational_constant * (obj1.m * obj2.m) / r ** 2
+    return F * (obj2.x - obj1.x) / r, F * (obj2.y - obj1.y) / r

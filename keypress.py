@@ -1,4 +1,4 @@
-key_force = 0.1
+key_force = 0.5
 
 
 def move_player(event, player):

@@ -4,6 +4,8 @@ planets, etc """
 from abc import abstractmethod
 from random import uniform
 
+from calculate_gravitation import *
+
 
 class space_obj:
     def __init__(self, m, x, y, vx, vy, size, player, canvas):
@@ -114,3 +116,9 @@ class space_obj:
     def set_force(self, force_x, force_y):
         self.force_x = force_x
         self.force_y = force_y
+
+    def act(self, other: 'space_obj'):
+        """ Interact self with other """
+        F = calculate_gravitation(self, other)
+        self.apply_force(F[0], F[1])
+        other.apply_force(-F[0], -F[1])
