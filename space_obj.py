@@ -5,6 +5,7 @@ from abc import abstractmethod
 from random import uniform
 
 from calculate_gravitation import *
+from calc_collision import *
 
 
 class space_obj:
@@ -14,7 +15,7 @@ class space_obj:
         self.y = y
         self.vx = vx
         self.vy = vy
-        self.size = size
+        self.r = None
         if player is None:
             player = self
         self.player = player
@@ -117,8 +118,16 @@ class space_obj:
         self.force_x = force_x
         self.force_y = force_y
 
-    def act(self, other: 'space_obj'):
-        """ Interact self with other """
-        F = calculate_gravitation(self, other)
-        self.apply_force(F[0], F[1])
-        other.apply_force(-F[0], -F[1])
+    def check_collision(self, other: 'space_obj'):
+        """ Check if self is collising with other """
+        dx = self.x - other.x
+        dy = self.y - other.y
+        if  dx ** 2 + dy ** 2 > (self.r + other.r) ** 2:
+            return False
+        elif dx * (self.vx - other.vx) < 0:
+            return True
+        elif dy * (self.vy - other.vy) < 0:
+            return True
+        else:
+            return False
+
